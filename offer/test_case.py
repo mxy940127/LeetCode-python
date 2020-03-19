@@ -74,3 +74,18 @@ def test_fib_arrays():
 def test_count_frog_jump_way():
     n = 6
     assert s.count_frog_jump_way(n) == 13
+
+
+def test_count_frog_jump_way_n():
+    n = 6
+    assert s.count_frog_jump_way_n(n) == 2**(n-1)
+
+
+def test_cover_rectangle():
+    n = 6
+    assert s.cover_rectangle(n) == 13
+
+
+def test_one_bits_in_number():
+    n = 9
+    assert s.count_one_number_binary(n) == 2

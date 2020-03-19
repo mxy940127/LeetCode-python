@@ -29,7 +29,7 @@ class Solution:
         self.fib_map = {}
         self.fib_dict = {}
         self.frog_ans = {0:0, 1:1, 2:2}
-
+        self.rectangle_map = {1:1, 2:2}
 
     """
     题目: 在一个二维数组中,每一行都按照从左到右递增的顺序排列,每一列都按照从上到下递增的顺序排序。请完成一个函数,
@@ -65,7 +65,6 @@ class Solution:
                 return True
         return False
 
-
     """
     题目:请实现一个函数，将一个字符串中的每个空格替换成“%20”。
     例如，当字符串为We Are Happy.则经过替换之后的字符串为We%20Are%20Happy。
@@ -78,7 +77,6 @@ class Solution:
             else:
                 temp = temp + char
         return temp
-
 
     """
     题目:输入一个链表，按链表值从尾到头的顺序返回一个ArrayList。
@@ -120,7 +118,6 @@ class Solution:
             min_num = min(min_num, nums[i])
         return min_num
 
-
     """
     题目:构造斐波那契数列,要求输入一个整数n,输出斐波那契数列的第n项
     """
@@ -144,7 +141,6 @@ class Solution:
             self.fib_dict[i] = f
         return self.fib_dict[n]
 
-
     """
     题目:一只青蛙一次可以跳上1级台阶，也可以跳上2级。求该青蛙跳上一个n级的台阶总共有多少种跳法?
     可以等同为斐波那契数列
@@ -156,3 +152,35 @@ class Solution:
             ans = self.count_frog_jump_way(n-1) + self.count_frog_jump_way(n-2)
             self.frog_ans[n] = ans
         return ans
+
+    """
+    题目:一只青蛙一次可以跳上1级台阶，也可以跳上2级……它也可以跳上n级。求该青蛙跳上一个n级的台阶总共有多少种跳法
+    """
+    def count_frog_jump_way_n(self, n: int) -> int:
+        if n in self.frog_ans:
+            return self.frog_ans[n]
+        else:
+            ans = 2 * self.count_frog_jump_way_n(n-1)
+            self.frog_ans[n] = ans
+        return self.frog_ans[n]
+
+    """
+    题目:我们可以用2*1的小矩形横着或者竖着去覆盖更大的矩形。请问用n个2*1的小矩形无重叠地覆盖一个2*n的大矩形，总共有多少种方法
+    """
+    def cover_rectangle(self, n: int) -> int:
+        if n in self.rectangle_map:
+            return self.rectangle_map[n]
+        else:
+            ans = self.cover_rectangle(n-1) + self.cover_rectangle(n-2)
+            self.rectangle_map[n] = ans
+        return self.rectangle_map[n]
+
+    """
+    题目:输入一个整数，输出该数二进制表示中1的个数。其中负数用补码表示。
+    """
+    def count_one_number_binary(self, n: int) -> int:
+        count = 0
+        while n:
+            count = count + n & 1
+            n >> 1
+        return count
