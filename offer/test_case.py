@@ -87,5 +87,15 @@ def test_cover_rectangle():
 
 
 def test_one_bits_in_number():
-    n = 9
+    n = 3
     assert s.count_one_number_binary(n) == 2
+
+
+def test_power_function():
+    assert s.power_function(base=-2.0, exponent=2) == 4
+    assert s.power_function(base=-2, exponent=-2) == 0.25
+
+
+def test_array_re_order():
+    nums = [4, 1, 3, 2]
+    assert s.array_re_order_with_two_extra_array(nums) == [1, 3, 4, 2]

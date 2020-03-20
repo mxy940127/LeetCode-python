@@ -33,7 +33,7 @@ class Solution:
 
     """
     题目: 在一个二维数组中,每一行都按照从左到右递增的顺序排列,每一列都按照从上到下递增的顺序排序。请完成一个函数,
-    输入这样的一个二维数组和一个整数,判断数组中是否含有该整数。
+          输入这样的一个二维数组和一个整数,判断数组中是否含有该整数。
     """
     def find_in_two_dimensional_array(self, arrays: List[List[int]], target: int) -> bool:
         row = len(arrays)
@@ -67,7 +67,7 @@ class Solution:
 
     """
     题目:请实现一个函数，将一个字符串中的每个空格替换成“%20”。
-    例如，当字符串为We Are Happy.则经过替换之后的字符串为We%20Are%20Happy。
+         例如，当字符串为We Are Happy.则经过替换之后的字符串为We%20Are%20Happy。
     """
     def replace_blank(self, string: str) -> str:
         temp = ""
@@ -106,7 +106,8 @@ class Solution:
 
     """
     题目:把一个数组最开始的若干个元素搬到数组的末尾，我们称之为数组的旋转。
-    输入一个非减排序的数组的一个旋转，输出旋转数组的最小元素。例如数组{3,4,5,1,2}为{1,2,3,4,5}的一个旋转，该数组的最小值为1。
+         输入一个非减排序的数组的一个旋转，输出旋转数组的最小元素。
+         例如数组{3,4,5,1,2}为{1,2,3,4,5}的一个旋转，该数组的最小值为1。
     NOTE：给出的所有元素都大于0，若数组大小为0，请返回0。
     """
     def rotate_part_of_array(self, nums: List[int]) -> int:
@@ -143,7 +144,6 @@ class Solution:
 
     """
     题目:一只青蛙一次可以跳上1级台阶，也可以跳上2级。求该青蛙跳上一个n级的台阶总共有多少种跳法?
-    可以等同为斐波那契数列
     """
     def count_frog_jump_way(self, n: int) -> int:
         if n in self.frog_ans:
@@ -181,6 +181,44 @@ class Solution:
     def count_one_number_binary(self, n: int) -> int:
         count = 0
         while n:
-            count = count + n & 1
-            n >> 1
+            n = (n - 1) & n
+            count += 1
         return count
+
+    """
+    题目:给定一个double类型的浮点数base和int类型的整数exponent。求base的exponent次方。
+    """
+    def power_function(self, base: float, exponent: int) -> float:
+        if exponent == 0:
+            return 1
+        if base == 0:
+            return 0
+        temp = 1
+        if exponent < 0:
+            abs_exponent = -exponent
+            while abs_exponent:
+                temp = temp * base
+                abs_exponent -= 1
+            return 1/temp
+        while exponent:
+            temp = temp * base
+            exponent -= 1
+        return temp
+
+    """
+    题目:输入一个整数数组，实现一个函数来调整该数组中数字的顺序，使得所有的奇数位于数组的前半部分，
+         所有的偶数位于数组的后半部分，并保证奇数和奇数，偶数和偶数之间的相对位置不变。
+    """
+    def array_re_order_with_two_extra_array(self, nums: List[int]) -> List[int]:
+        odd = []
+        even = []
+        for _ in nums:
+            if _ % 2 == 0:
+                even.append(_)
+            else:
+                odd.append(_)
+        odd.extend(even)
+        return odd
+
+    def array_re_order(self, nums: List[int]) -> List[int]:
+        pass
