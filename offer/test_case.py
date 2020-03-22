@@ -78,7 +78,7 @@ def test_count_frog_jump_way():
 
 def test_count_frog_jump_way_n():
     n = 6
-    assert s.count_frog_jump_way_n(n) == 2**(n-1)
+    assert s.count_frog_jump_way_n(n) == 2 ** (n-1)
 
 
 def test_cover_rectangle():
@@ -97,5 +97,37 @@ def test_power_function():
 
 
 def test_array_re_order():
-    nums = [4, 1, 3, 2]
-    assert s.array_re_order_with_two_extra_array(nums) == [1, 3, 4, 2]
+    nums = [4, 2, 1, 6, 3]
+    assert s.array_re_order_with_two_extra_array(nums) == [1, 3, 4, 2, 6]
+    assert s.array_re_order(nums) == [1, 3, 4, 2, 6]
+    assert s.array_re_order_two(nums) == [1, 3, 4, 2, 6]
+
+
+def test_Kth_in_link_list():
+    A1 = ListNode(1)
+    A2 = ListNode(2)
+    A3 = ListNode(3)
+    A4 = ListNode(4)
+    A5 = ListNode(5)
+    A1.next = A2
+    A2.next = A3
+    A3.next = A4
+    A4.next = A5
+    A5.next = None
+
+    assert s.the_k_node_in_link_list(A1, 6) is None
+
+
+def test_reverse_link_list():
+    A1 = ListNode(1)
+    A2 = ListNode(2)
+    A3 = ListNode(3)
+    A4 = ListNode(4)
+    A5 = ListNode(5)
+    A1.next = A2
+    A2.next = A3
+    A3.next = A4
+    A4.next = A5
+    A5.next = None
+
+    assert s.reverse_link_list_recursion(A1) == A5

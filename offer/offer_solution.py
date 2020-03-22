@@ -29,6 +29,7 @@ class Solution:
         self.fib_map = {}
         self.fib_dict = {}
         self.frog_ans = {0:0, 1:1, 2:2}
+        self.frog_ans_n = {0:0, 1:1, 2:2}
         self.rectangle_map = {1:1, 2:2}
 
     """
@@ -157,12 +158,12 @@ class Solution:
     题目:一只青蛙一次可以跳上1级台阶，也可以跳上2级……它也可以跳上n级。求该青蛙跳上一个n级的台阶总共有多少种跳法
     """
     def count_frog_jump_way_n(self, n: int) -> int:
-        if n in self.frog_ans:
-            return self.frog_ans[n]
+        if n in self.frog_ans_n:
+            return self.frog_ans_n[n]
         else:
             ans = 2 * self.count_frog_jump_way_n(n-1)
-            self.frog_ans[n] = ans
-        return self.frog_ans[n]
+            self.frog_ans_n[n] = ans
+        return self.frog_ans_n[n]
 
     """
     题目:我们可以用2*1的小矩形横着或者竖着去覆盖更大的矩形。请问用n个2*1的小矩形无重叠地覆盖一个2*n的大矩形，总共有多少种方法
@@ -221,4 +222,79 @@ class Solution:
         return odd
 
     def array_re_order(self, nums: List[int]) -> List[int]:
-        pass
+        size = len(nums)
+        p1 = 0
+        while p1 < size:
+            while nums[p1] % 2 == 1 and p1 < size:
+                p1 += 1
+            p2 = p1 + 1
+            while p2 < size and nums[p2] % 2 == 0:
+                p2 += 1
+            if p2 < size:
+                nums.insert(p1, nums.pop(p2))
+                p1 += 1
+            else:
+                break
+        return nums
+
+    def array_re_order_two(self, nums: List[int]) -> List[int]:
+        size = len(nums)
+        p1 = 0
+        temp = []
+        while p1 < size:
+            while nums[p1] % 2 == 1 and p1 < size:
+                p1 += 1
+            p2 = p1 + 1
+            while p2 < size and nums[p2] % 2 == 0:
+                p2 += 1
+            if p2 < size:
+                temp.extend(nums[p2:])
+                temp.extend(nums[:p2])
+                nums = temp
+            else:
+                break
+        return nums
+
+    """
+    题目:输入一个链表，输出该链表中倒数第k个结点。
+    """
+    def the_k_node_in_link_list(self, head: ListNode, k: int) -> ListNode or None:
+        if not head or k <= 0:
+            return None
+        p = q = head
+        t = 0
+        while p and t < k:
+            p = p.next
+            t += 1
+        if t < k:
+            return None
+        while p is not None:
+            p = p.next
+            q = q.next
+        return q
+
+    """
+    题目:反转链表, 请给出两种方式
+    """
+    def reverse_link_list_iteration(self, head: ListNode) -> ListNode:
+        curr, prev = head, None
+        while curr:
+            curr.next, prev, curr = prev, curr, curr.next
+        return prev
+
+    def reverse_link_list_iteration_with_temp_node(self, head: ListNode) -> ListNode:
+        curr, prev = head, None
+        while curr:
+            temp = curr.next
+            curr.next = prev
+            prev = curr
+            curr = temp
+        return prev
+
+    def reverse_link_list_recursion(self, head: ListNode) -> ListNode:
+        if not head or not head.next:
+            return head
+        tail = self.reverse_link_list_recursion(head.next)
+        head.next.next = head
+        head.next = None
+        return tail
