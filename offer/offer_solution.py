@@ -298,3 +298,27 @@ class Solution:
         head.next.next = head
         head.next = None
         return tail
+
+
+    """
+    题目:输入两个单调递增的链表，输出两个链表合成后的链表，当然我们需要合成后的链表满足单调不减规则。
+    """
+    def combine_two_link_list(self, l1: ListNode, l2: ListNode) -> ListNode:
+        temp = []
+        while l1:
+            temp.append(l1.val)
+            l1 = l1.next
+        while l2:
+            temp.append(l2.val)
+            l2 = l2.next
+        print(temp)
+        temp.sort()
+        print(temp)
+        size = len(temp)
+        head = ListNode(temp[0])
+        pre = head
+        for i in range(1, size):
+            temp_node = ListNode(temp[i])
+            pre.next = temp_node
+            pre = pre.next
+        return head
