@@ -25,4 +25,5 @@ B4.next = B5
 B5.next = None
 
 s = Solution()
-print(s.combine_two_link_list(A1, B1))
+c = s.combine_two_link_list_recursion(A1, B1)
+print(s.combine_two_link_list_recursion(A1, B1))

@@ -3,7 +3,7 @@
 #  @Author   : Eric.Miao
 
 from offer.offer_solution import Solution, ListNode
-from offer.queue import MyQueue
+from offer.offer_queue import MyQueue
 
 s = Solution()
 
@@ -156,4 +156,4 @@ def test_combine_two_link_list():
     B4.next = B5
     B5.next = None
 
-    assert s.combine_two_link_list(A1, B1) == A1
+    assert s.combine_two_link_list_recursion(A1, B1) == A1

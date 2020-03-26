@@ -303,7 +303,8 @@ class Solution:
     """
     题目:输入两个单调递增的链表，输出两个链表合成后的链表，当然我们需要合成后的链表满足单调不减规则。
     """
-    def combine_two_link_list(self, l1: ListNode, l2: ListNode) -> ListNode:
+    def combine_two_link_list_with_temp_list(self, l1: ListNode, l2: ListNode) -> ListNode:
+        # 若采用临时列表,储存节点值并重新构造
         temp = []
         while l1:
             temp.append(l1.val)
@@ -311,10 +312,10 @@ class Solution:
         while l2:
             temp.append(l2.val)
             l2 = l2.next
-        print(temp)
         temp.sort()
-        print(temp)
         size = len(temp)
+        if size < 1:
+            return None
         head = ListNode(temp[0])
         pre = head
         for i in range(1, size):
@@ -322,3 +323,15 @@ class Solution:
             pre.next = temp_node
             pre = pre.next
         return head
+
+    def combine_two_link_list_recursion(self, l1: ListNode, l2: ListNode) -> ListNode:
+        if not l1:
+            return l2
+        elif not l2:
+            return l1
+        elif l1.val <= l2.val:
+            l1.next = self.combine_two_link_list_recursion(l1.next, l2)
+            return l1
+        else:
+            l2.next = self.combine_two_link_list_recursion(l1, l2.next)
+            return l2
