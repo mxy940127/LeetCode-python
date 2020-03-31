@@ -335,3 +335,27 @@ class Solution:
         else:
             l2.next = self.combine_two_link_list_recursion(l1, l2.next)
             return l2
+
+    """
+    题目:输入两棵二叉树A，B，判断B是不是A的子结构。（空树不是任意一个树的子结构）
+    """
+    def judge_sub_tree(self, pa: TreeNode, pb: TreeNode) -> bool:
+        if not pa or not pb:
+            return False
+        result = False
+        if pa.val == pb.val:
+            result = self.is_sub_tree(pa, pb)
+        if not result:
+            result = self.judge_sub_tree(pa.left, pb)
+        if not result:
+            result = self.judge_sub_tree(pa.right, pb)
+        return result
+
+    def is_sub_tree(self, pa: TreeNode, pb: TreeNode) -> bool:
+        if not pa:
+            return True
+        if not pb:
+            return False
+        if pa.val != pb.val:
+            return False
+        return self.is_sub_tree(pa.left, pb.left) and self.is_sub_tree(pa.right, pb.right)

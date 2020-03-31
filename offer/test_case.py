@@ -2,7 +2,7 @@
 # -*- coding:utf-8 -*-
 #  @Author   : Eric.Miao
 
-from offer.offer_solution import Solution, ListNode
+from offer.offer_solution import Solution, ListNode, TreeNode
 from offer.offer_queue import MyQueue
 
 s = Solution()
@@ -157,3 +157,17 @@ def test_combine_two_link_list():
     B5.next = None
 
     assert s.combine_two_link_list_recursion(A1, B1) == A1
+
+
+def test_judge_sub_tree():
+    # pre = [1, 2, 4, 7, 3, 5, 6, 8]
+    # tin = [4, 7, 2, 1, 5, 3, 8, 6]
+    pre = [1, 2, 4, 5, 3, 6]
+    tin = [4, 2, 5, 1, 3, 6]
+    root = s.reConstructBinaryTree(pre, tin)
+    pb1 = TreeNode(2)
+    pb2 = TreeNode(4)
+    pb3 = TreeNode(5)
+    pb1.left = pb2
+    pb1.right = pb3
+    assert s.judge_sub_tree(root, pb1) is True
